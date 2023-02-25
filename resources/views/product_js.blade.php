@@ -107,6 +107,54 @@ $('#update_price').val(up_price);
 
 
 
+$(document).on('click', '.update_product',function(e){
+
+e.preventDefault();
+
+//alert('oky.?');
+var update_id = $('#update_id').val();
+
+var update_name = $('#update_name').val();
+var update_price = $('#update_price').val();
+
+console.log(update_id+update_name+update_price);
+
+
+$.ajax({
+
+url:"{{ route('product.update') }}",
+method: 'post',
+
+data: {
+
+    update_id:update_id, update_name:update_name, update_price:update_price,
+},
+
+
+success:function(res){
+
+    if(res.status=='success'){
+
+        $('#editModal').modal('hide');
+        $('#UpdateModalForm')[0].reset();
+        $('#tableID').load(location.href+" #tableID");
+
+
+    }
+
+}, error:function(){
+
+}
+
+ });
+
+
+
+
+
+
+})// end update product function
+
 
 
 

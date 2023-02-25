@@ -11,7 +11,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
 
-                              <form>
+                              <form id="UpdateModalForm">
                                 @csrf
 
                                <input type="hidden" id="update_id" name="id">
@@ -39,7 +39,7 @@
 
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Update</button>
+                                <button type="button" class="btn btn-primary update_product">Update</button>
                               </div>
 
                           </form>

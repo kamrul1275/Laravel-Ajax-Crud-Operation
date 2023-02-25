@@ -58,7 +58,7 @@ class ProductController extends Controller
     {
 
 
-       $ProductData =  Product::get()->update([
+       $ProductData =  Product::where('id',$request->update_id)->update([
 
         'product_name'=> $request->update_name,
 
