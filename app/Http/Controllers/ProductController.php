@@ -11,7 +11,7 @@ class ProductController extends Controller
 
     public function Index( $var = null)
     {
-        $Products = Product::latest()->paginate(5);
+        $Products = Product::latest()->paginate(4);
        return view('home',compact('Products'));
     }
     //end method
@@ -20,6 +20,20 @@ class ProductController extends Controller
 
     public function AddProduct(Request $request)
     {
+
+        $request->validate([
+
+            'product_name'=>'required',
+            'product_price'=>'required',
+        ],
+
+    [
+        'product_name'.'required'=> 'Product name is required',
+        'product_price'.'required'=> 'Product price is required',
+    ]
+
+
+    );
 
 
        $ProductData = new Product();
@@ -82,7 +96,18 @@ class ProductController extends Controller
 
 
 
+public function DeleteProduct(Request $request)
+{
 
+Product::find($request->product_id)->delete();
+
+
+    return response()->json([
+
+        'status'=>'success',
+
+        ]);
+}
 
 
 

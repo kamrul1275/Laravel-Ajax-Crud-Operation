@@ -6,8 +6,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+{{-- toastr --}}
+
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     <title>Hello, world!</title>
   </head>
@@ -51,7 +58,10 @@
 
          <div class="modal-body">
 
+<div class="errorMsg">
 
+
+</div>
 
                <div class="mb-3">
                  <label for="Name" class="form-label">Product Name
@@ -112,7 +122,10 @@
 
 
                                   >Edit</a>
-                                 <a href="" class="btn btn-danger">Delete</a>
+                                 <a href="" class="btn btn-danger DeleteProduct"
+                                 data-id={{ $product->id }}
+
+                                 >Delete</a>
 
 
                                 </td>
@@ -124,6 +137,7 @@
                          </tbody>
 
                        </table>
+
                        {{ $Products->links() }}
 
 
@@ -136,5 +150,8 @@
 
      @include('edit')
 @include('product_js')
+
+
+        {!! Toastr::message() !!}
   </body>
 </html>

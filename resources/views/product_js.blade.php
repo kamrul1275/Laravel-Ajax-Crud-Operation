@@ -3,6 +3,9 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
 
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+
 <script>
         $.ajaxSetup({
         headers: {
@@ -52,9 +55,47 @@ success:function(res){
         $('#tableID').load(location.href+" #tableID");
 
 
+
+
+
+
+
+        Command: toastr["success"]("Product Added....!", "Success")
+
+                    toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                    }
+
+
+
+
     }
 
-}, error:function(){
+}, error:function(err){
+
+    let error= err.responseJSON;
+
+    console.log(error);
+
+
+    $.each(error.errors, function(index,value){
+
+      $('.errorMsg').append("<span class='text-danger'>" +value+ "</span>" + "<br>");
+    });
 
 }
 
@@ -140,6 +181,29 @@ success:function(res){
         $('#tableID').load(location.href+" #tableID");
 
 
+
+
+        Command: toastr["success"]("Product Updated....!", "Success")
+
+                toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+                }
+
+
     }
 
 }, error:function(){
@@ -150,18 +214,83 @@ success:function(res){
 
 
 
-
-
-
 })// end update product function
 
 
 
 
+// delete poduct
+
+
+
+$(document).on('click', '.DeleteProduct',function(e){
+
+e.preventDefault();
+
+//alert('oky.?');
+var product_id = $(this).data('id');
+
+//alert(product_id);
+//console.log(product_id);
+
+if(confirm('are u sure.?')){
+
+
+ $.ajax({
+
+        url:"{{ route('product.delete') }}",
+        method: 'get',
+
+        data: {
+
+            product_id:product_id,
+        },
+
+
+success:function(res){
+
+    if(res.status=='success'){
+
+
+        $('#tableID').load(location.href+" #tableID");
 
 
 
 
+        Command: toastr["success"]("Product Deleted....!", "Success")
+
+                    toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                    }
+
+
+    }
+}
+
+
+ });
+
+
+
+}
+
+
+
+})
 
 
 
